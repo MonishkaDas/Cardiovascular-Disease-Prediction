@@ -10,40 +10,57 @@ import pandas as pd
 from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
 
+import seaborn as sns
+sns.set()
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
+from xgboost import XGBClassifier, plot_importance
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score,confusion_matrix
+
+
+
 # TODO: Create TabularDataset using TabularDatasetFactory
 # Data is located at:
-web_path= "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
-ds = TabularDatasetFactory.from_delimited_files(path=web_path)
+# web_path= "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
+# ds = TabularDatasetFactory.from_delimited_files(path=web_path)
+
+dataset = pd.read_csv("../input/Dataset_spine.csv")
+
+#ds = TabularDatasetFactory.from_delimited_files(path=web_path)
 
 run = Run.get_context()
 
 
 
 def clean_data(data):
-    # Dict for cleaning data
-    months = {"jan":1, "feb":2, "mar":3, "apr":4, "may":5, "jun":6, "jul":7, "aug":8, "sep":9, "oct":10, "nov":11, "dec":12}
-    weekdays = {"mon":1, "tue":2, "wed":3, "thu":4, "fri":5, "sat":6, "sun":7}
-
-    # Clean and one hot encode data
+    #remove unnecessary column
+    del dataset["Unnamed: 13"]
+    
+    # Change the Column names
+    dataset.rename(columns = {
+        "Col1" : "pelvic_incidence", 
+        "Col2" : "pelvic_tilt",
+        "Col3" : "lumbar_lordosis_angle",
+        "Col4" : "sacral_slope", 
+        "Col5" : "pelvic_radius",
+        "Col6" : "degree_spondylolisthesis", 
+        "Col7" : "pelvic_slope",
+        "Col8" : "direct_tilt",
+        "Col9" : "thoracic_slope", 
+        "Col10" :"cervical_tilt", 
+        "Col11" : "sacrum_angle",
+        "Col12" : "scoliosis_slope", 
+        "Class_att" : "y"}, inplace=True)
+    
     x_df = data.to_pandas_dataframe().dropna()
-    jobs = pd.get_dummies(x_df.job, prefix="job")
-    x_df.drop("job", inplace=True, axis=1)
-    x_df = x_df.join(jobs)
-    x_df["marital"] = x_df.marital.apply(lambda s: 1 if s == "married" else 0)
-    x_df["default"] = x_df.default.apply(lambda s: 1 if s == "yes" else 0)
-    x_df["housing"] = x_df.housing.apply(lambda s: 1 if s == "yes" else 0)
-    x_df["loan"] = x_df.loan.apply(lambda s: 1 if s == "yes" else 0)
-    contact = pd.get_dummies(x_df.contact, prefix="contact")
-    x_df.drop("contact", inplace=True, axis=1)
-    x_df = x_df.join(contact)
-    education = pd.get_dummies(x_df.education, prefix="education")
-    x_df.drop("education", inplace=True, axis=1)
-    x_df = x_df.join(education)
-    x_df["month"] = x_df.month.map(months)
-    x_df["day_of_week"] = x_df.day_of_week.map(weekdays)
-    x_df["poutcome"] = x_df.poutcome.apply(lambda s: 1 if s == "success" else 0)
-
-    y_df = x_df.pop("y").apply(lambda s: 1 if s == "yes" else 0)
+    X = dataset.iloc[:, :-1]
+    scaler = MinMaxScaler()
+    scaled_data = scaler.fit_transform(X)
+    scaled_df = pd.DataFrame(data = scaled_data, columns = X.columns)
+    y_df = x_df.pop("y").apply(lambda s: 1 if s == "Abnormal" else 0)
     return x_df,y_df
 
     
@@ -61,7 +78,7 @@ def main():
     run.log("Max iterations:", np.int(args.max_iter))
     
     x, y = clean_data(ds)
-    x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.3,random_state=42,shuffle=True)
+    x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.15,random_state=42,shuffle=True)
 
     model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
 
