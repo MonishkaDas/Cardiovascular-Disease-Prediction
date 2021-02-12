@@ -225,7 +225,6 @@ We retrieve the best model based on the primary metric _Accuracy_ and register i
 
 Both, the AzureML Run and HyperDrive Run are compared and the best runs in each are registered. The best model from the two is chosen and then deployed. The code for the Model deployment is available in the _automl.ipynb_ notebook. we retrive the swagger URI and scoring URI along with deployment status, which is shown as "healthy" in this case. The _logs.py_ and _endpoint.py_ are updated with the scoring uri and key and run. The _logs.py_ enables Applications Insights and the _endpoint.py_ is used to test the model.
 
-![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(121).png?raw=true "Summary Importance")
 
 ### Deploying the Best Model
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(127).png?raw=true "Summary Importance")
@@ -233,14 +232,17 @@ Both, the AzureML Run and HyperDrive Run are compared and the best runs in each 
 ### Deployed Model
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(128).png?raw=true "Summary Importance")
 
+### Retrieving Scoring URI, Swagger URI and Deployment status
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(121).png?raw=true "Summary Importance")
+
 ### Running logs.py
-![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(134).png?raw=true "Summary Importance")
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(135).png?raw=true "Summary Importance")
 
 ### Enable Applications Insights - True
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(129).png?raw=true "Summary Importance")
 
 ### Running endpoint.py
-![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(135).png?raw=true "Summary Importance")
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(134).png?raw=true "Summary Importance")
 
 
 ### Testing the Servive
@@ -270,7 +272,7 @@ ONNX's container format allows neural networks to be switched between different 
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(131).png?raw=true "Summary Importance")
 
 ### Predictions from the ONNX Model
-![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(124).png?raw=true "Summary Importance")
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(132).png?raw=true "Summary Importance")
 
 
 
