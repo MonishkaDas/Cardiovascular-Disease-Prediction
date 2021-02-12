@@ -142,6 +142,9 @@ The Explanations section shed some light on which of the features had the most i
 |**label_column_name**|This is the target column, in this case **\"cardio\"**|
 |**enable_onnx_compatible_model**|This is set as **True** to make the model onnx compatible|
 
+### RunDetails widget
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(125).png?raw=true "Summary Importance")
+
 
         
 
@@ -170,6 +173,9 @@ The best performing model is the `VotingEnsemble`
 
 The pipeline includes a Random Parameter Sampler, Bandit Policy and SKLearn estimator which are used in the Hyperdrive configuration for maximum optimization. The file _train.py_ is passed to the estimator as an entry_file and the estimator _est_ along with the policy, Parameter Sampler and some other parameters like primary metric (_Accuracy_) are passed to the HyderDrive Config Method which is then submitted and the Run details are displayed using the widget.
 
+### HyperDriveRun - Completed
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(122).png?raw=true "Summary Importance")
+
 **Random sampling**
 
 Random sampling supports discrete and continuous hyperparameters. It supports early termination of low-performance runs. In random sampling, hyperparameter values are randomly selected from the defined search space. I chose to pass the parameters _**--C** (0.4, 0.5) , **max iter** (1000, 1100, 1200, 1300, 1400, 1500)_ to the Random Sampler
@@ -179,9 +185,17 @@ Random sampling supports discrete and continuous hyperparameters. It supports ea
 
 Bandit policy is based on slack factor/slack amount and evaluation interval. Bandit terminates runs where the primary metric is not within the specified slack factor/slack amount compared to the best performing run. I chose the following parameters for the Bandit Policy _slack_factor = 0.001, evaluation_interval=1_.
 
-We retrieve the best model based on the primary metric _Accuracy_ and register it.
+
 
 ### Results
+
+
+### Child Runs - Metrics
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(123).png?raw=true "Summary Importance")
+
+
+### RunDetails widget
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(124).png?raw=true "Summary Importance")
 
 
 **Best Run ID :**  HD_da36b743-a9e9-40f3-aaa5-d4c5d7fdad9d_1
@@ -200,6 +214,12 @@ We retrieve the best model based on the primary metric _Accuracy_ and register i
 
 *--max_iter* :  1300
 
+We retrieve the best model based on the primary metric _Accuracy_ and register it.
+
+### Registered Models
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(126).png?raw=true "Summary Importance")
+
+
 
 ## Model Deployment
 
@@ -207,10 +227,30 @@ Both, the AzureML Run and HyperDrive Run are compared and the best runs in each 
 
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(121).png?raw=true "Summary Importance")
 
+### Deploying the Best Model
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(127).png?raw=true "Summary Importance")
+
+### Deployed Model
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(128).png?raw=true "Summary Importance")
+
+### Running logs.py
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(134).png?raw=true "Summary Importance")
+
+### Enable Applications Insights - True
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(129).png?raw=true "Summary Importance")
+
+### Running endpoint.py
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(135).png?raw=true "Summary Importance")
+
+
+### Testing the Servive
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(130).png?raw=true "Summary Importance")
+
 
 
 ## Screen Recording
 The link to the screencast - https://www.youtube.com/watch?v=LPxz2xldigQ&feature=youtu.be
+
 
 ## Standout Suggestions
 
@@ -225,5 +265,13 @@ ONNX (Open Neural Network Exchange) is an open container format for the exchange
 </p>
 
 ONNX's container format allows neural networks to be switched between different cloud service providers or into private clouds. More portability makes it possible to use models in new places, to the developer's benefit, and increases the range of models available to Facebook and Microsoft. It may also foster innovation and speed development by facilitating sharing and collaboration among researchers.
+
+### Retrieving the ONNX Model
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(131).png?raw=true "Summary Importance")
+
+### Predictions from the ONNX Model
+![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(124).png?raw=true "Summary Importance")
+
+
 
 The code to retrieving the ONNX model and testing it is in the _automl.ipynb_ file.
