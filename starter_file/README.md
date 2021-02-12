@@ -11,13 +11,13 @@ This is the final project of Udacity Azure ML Nanodegree. As a part of this proj
 
 ## Project Set Up and Installation
 
-The project was run and deployed on Azure ML studio. For anyone trying to replicate my work, you will need to create an Azure ML instance to run the notebook. The compute target, which in case is named "compute-cluster" is made and is used to run both the AutoML Model (_automl.ipynb_) and the HyperDrive Model (_hyperparameter-tuning.ipynb_). the files can found the repository along with the _train.py_ file that is the entry-script for the HyperDrive Configuration model, the _logs.py_ file to enable application insights and the _endpoint.py_ file to test the endpoints. To use the configurations on a different dataset, the _train.py_ and _endpoint.py_ files need to altered accordingly and the dataset has to be cleaned and processed as required. A few tweaks to the configuration must get you the best possible model that can be then deployed using the code in the  _automl.ipynb_ file.
+The project was run and deployed on Azure ML studio. For anyone trying to replicate my work, you will need to create an Azure ML instance to run the notebook. The compute target, which in case is named "compute-cluster" is made and is used to run both the AutoML Model (_automl.ipynb_) and the HyperDrive Model (_hyperparameter-tuning.ipynb_). The files can found the repository along with the _train.py_ file that is the entry-script for the HyperDrive Configuration model, the _logs.py_ file to enable application insights and the _endpoint.py_ file to test the endpoints. To use the configurations on a different dataset, the _train.py_ and _endpoint.py_ files need to altered accordingly and the dataset has to be cleaned and processed as required. A few tweaks to the configuration must get you the best possible model that can be then deployed using the code in the  _automl.ipynb_ file.
 
 ## Dataset
 
 ### Overview
 
-Cardiovascular diseases (CVDs) are the number 1 cause of death globally, taking an estimated 17.9 million lives each year. CVDs are a group of disorders of the heart and blood vessels and include coronary heart disease, cerebrovascular disease, rheumatic heart disease and other conditions. Four out of 5CVD deaths are due to heart attacks and strokes, and one third of these deaths occur prematurely in people under 70 years of age.
+Cardiovascular diseases (CVDs) are the number #1 cause of death globally, taking an estimated 17.9 million lives each year. CVDs are a group of disorders of the heart and blood vessels and include coronary heart disease, cerebrovascular disease, rheumatic heart disease and other conditions. Four out of Five CVD deaths are due to heart attacks and strokes, and one third of these deaths occur prematurely in people under 70 years of age.
 
 Individuals at risk of CVD may demonstrate raised blood pressure, glucose, and lipids as well as overweight and obesity. These can all be easily measured in primary care facilities. Identifying those at highest risk of CVDs and ensuring they receive appropriate treatment can prevent premature deaths. Access to essential noncommunicable disease medicines and basic health technologies in all primary health care facilities is essential to ensure that those in need receive treatment and counselling.
 
@@ -31,7 +31,7 @@ Individuals at risk of CVD may demonstrate raised blood pressure, glucose, and l
 
 
 
-This Dataset (https://www.kaggle.com/sulianova/cardiovascular-disease-dataset) is from Kaggle. It's called the Cardiovascular Disease Dataset. The dataset consists of 70 000 records of patients data, 11 features + target.
+This Dataset (https://www.kaggle.com/sulianova/cardiovascular-disease-dataset) is from Kaggle. It is called the Cardiovascular Disease Dataset. The dataset consists of 70 000 records of patients data, 11 features and a target variable.
 
 ### Data description
 There are 3 types of input features:
@@ -66,12 +66,12 @@ The following tables gives a detailed description of the dataset and its feature
 
 ### Task
 
-The task is to firstly, study the dataset and check for outliers, categorical values, missing values, etc. We then process the dataset and clean it. A well processed dataset gives out better results, this is why data preprocessing is an essential step despite the fact that AutoML has in-built functions to deal with improper data. After processing, we pass the dataset to the configured automl and hyperdrive models. We run the models and monitor the process using the run details widget. We then pick the best model from the two based on metrics, which in this case is the AutoML Model. We deploy the model and run _logs.py_ file to enable Applications insights. Finally, we test the endpoints of the model using the _endpoint.py_ file. We also creat a Onnx model and test it.
+The task is to firstly, study the dataset and check for outliers, categorical values, missing values, etc. We then process the dataset and clean it. A well processed dataset gives out better results, this is why data preprocessing is an essential step despite the fact that AutoML has in-built functions to deal with improper data. After processing, we pass the dataset to the configured automl and hyperdrive models. We run the models and monitor the process using the run details widget. We then pick the best model from the two based on metrics, which in this case is the AutoML Model. We deploy the model and run _logs.py_ file to enable Applications insights. Finally, we test the endpoints of the model using the _endpoint.py_ file. We also create a Onnx model and test it.
 
 
 ### Data Preprocessing
 
-The dataset has a total of 70,000 readings with no missing data. However, there are a few outliers and invalid readings (*For example: a few readings show the diastolic pressure, _ap-lo_ to be higher than the systolic pressure, _ap-hi_*). We drop the outliers and duplicate readings and clean the invalid data, we drop the column _"id"_, we convert the feature column _gender_ to a binary, we replace the categorical columns like _cholestrol, gluc_ with the dummies and we standardize columns like, _age, height, weight, ap-hi, ap-lo_. This data is then passed to the configured experiments and run.
+The dataset has a total of 70,000 readings with no missing data. However, there are a few outliers and invalid readings (*For example: a few readings show the diastolic pressure, _**ap-lo**_ to be higher than the systolic pressure, _**ap-hi**_*). We drop the outliers and the duplicate readings and clean the invalid data, we drop the column _"id"_, we convert the feature column _gender_ to a binary, we replace the categorical columns like _cholestrol, gluc_ with the dummies and we standardize columns like, _age, height, weight, ap-hi, ap-lo_. This data is then passed to the configured experiments and run.
 
 ### Access
 
@@ -79,7 +79,7 @@ The dataset is uploaded to the GitHub Repository and accessed through a link usi
 
 ## Automated ML
 
-Parameters like task, primary metric, experiment timeout, training data etc. are passed into the AutoMlConfig to create an optimzed pipeline run on AutoMl that test various models and displays the best ML Algorithm based on the metrics and run time. Around 187 pipelines with different ML Algorithms were run and the best one turned out to be the **Voting Ensemble** with Accuracy of _0.73125_
+Parameters like task, primary metric, experiment timeout, training data etc. are passed into the AutoMLConfig to create an optimized run on AutoMl that tests various models and displays the best ML Algorithm based on the metrics and run time. Around 187 pipelines with different ML Algorithms were run and the best one turned out to be the **Voting Ensemble** with Accuracy of _0.73125_
 
 ### Models
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(103).png?raw=true "Summary Importance")
@@ -117,18 +117,18 @@ Parameters like task, primary metric, experiment timeout, training data etc. are
 
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(109).png?raw=true "Summary Importance")
 
-### Explanation exploration - WeightMeanImputer and WeightMeanImputer for Probability Class:0
+### Explanation exploration - AgeMeanImputer and WeightMeanImputer for Probability Class:0
 
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(111).png?raw=true "Summary Importance")
 
-### Explanation exploration - WeightMeanImputer and WeightMeanImputer for Probability Class:1
+### Explanation exploration - AgeMeanImputer and WeightMeanImputer for Probability Class:1
 
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(112).png?raw=true "Summary Importance")
 
 
 
 
-The Explanations section shed some light on which of the features had the most impact in predicting the results. In this dataset, the duration, emp.var.rate and nr.employed seem to be the most essential for making accurate predictions.
+The Explanations section shed some light on which of the features had the most impact in predicting the results. In this dataset, the _ap-hi, age, cholestrol, ap-lo and weight_ were the most impactful in prediction of Cardiovascular diseases.
 
 | Configuration | Reason |
 | :- | :- |
@@ -172,7 +172,7 @@ The pipeline includes a Random Parameter Sampler, Bandit Policy and SKLearn esti
 
 **Random sampling**
 
-Random sampling supports discrete and continuous hyperparameters. It supports early termination of low-performance runs. In random sampling, hyperparameter values are randomly selected from the defined search space. I used _choice_ to pass the parameters _**--C** (0.4, 0.5) , **max iter** (1000, 1100, 1200, 1300, 1400, 1500)_ to the random Sampler
+Random sampling supports discrete and continuous hyperparameters. It supports early termination of low-performance runs. In random sampling, hyperparameter values are randomly selected from the defined search space. I chose to pass the parameters _**--C** (0.4, 0.5) , **max iter** (1000, 1100, 1200, 1300, 1400, 1500)_ to the Random Sampler
 
 
 **Bandit policy**
@@ -183,15 +183,16 @@ We retrieve the best model based on the primary metric _Accuracy_ and register i
 
 ### Results
 
-**Best Run ID **:  HD_da36b743-a9e9-40f3-aaa5-d4c5d7fdad9d_1
 
-**Accuracy:**  0.716566866267465
+**Best Run ID :**  HD_da36b743-a9e9-40f3-aaa5-d4c5d7fdad9d_1
 
-**Metrics: ** 
+**Accuracy :**  0.716566866267465
 
-*Regularization Strength:*: 0.40955258766901365
+**Metrics :** 
 
-*Max iterations*: 1300
+*Regularization Strength* : 0.40955258766901365
+
+*Max iterations* : 1300
 
 **Parameters:**
 
@@ -202,7 +203,7 @@ We retrieve the best model based on the primary metric _Accuracy_ and register i
 
 ## Model Deployment
 
-Both, the AzureML Run and HyperDrive Run are compared and the best runs in each are registered. The best model from the two is chosen and then deployed. The code for the Model deployment is available in the _automl.ipynb_ notebook. we retrive the swagger.URI and scoring.URI along with deployment status, which is shown as "healthy" in this case. The _logs.py_ and _endpoint.py_ are updated with the scoring.uri and key and run. The _logs.py_ enables Applications Insights and the _endpoint.py_ is used to test the model.
+Both, the AzureML Run and HyperDrive Run are compared and the best runs in each are registered. The best model from the two is chosen and then deployed. The code for the Model deployment is available in the _automl.ipynb_ notebook. we retrive the swagger URI and scoring URI along with deployment status, which is shown as "healthy" in this case. The _logs.py_ and _endpoint.py_ are updated with the scoring uri and key and run. The _logs.py_ enables Applications Insights and the _endpoint.py_ is used to test the model.
 
 ![Alt text](https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/Screenshot%20(121).png?raw=true "Summary Importance")
 
@@ -217,6 +218,12 @@ The link to the screencast - https://www.youtube.com/watch?v=LPxz2xldigQ&feature
 
 ONNX (Open Neural Network Exchange) is an open container format for the exchange of neural network models between different frameworks, providing they support ONNX import and export. ONNX was designed to enable fledgling AI systems to leave the nest, increasing their potential application base by expanding their interoperability.
 
+<p align="center">
+ 
+ <img src="https://github.com/MonishkaDas/nd00333-capstone/blob/master/starter_file/ScreenShots/unnamed-1024x482.png">
+
+</p>
+
 ONNX's container format allows neural networks to be switched between different cloud service providers or into private clouds. More portability makes it possible to use models in new places, to the developer's benefit, and increases the range of models available to Facebook and Microsoft. It may also foster innovation and speed development by facilitating sharing and collaboration among researchers.
 
-The got to retrieving the ONNX model and testing it is in the _automl.ipynb_ file.
+The code to retrieving the ONNX model and testing it is in the _automl.ipynb_ file.
